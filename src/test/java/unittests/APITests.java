@@ -5,30 +5,52 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.junit.Test;
 
+import static com.mashape.unirest.http.Unirest.*;
 
 
 public class APITests {
 
     @Test
-    public void request_listOfAllPostResources() throws UnirestException
+    public void getRequest_listOfAllPostResources() throws UnirestException
     {
-            Unirest.setTimeouts(0, 0);
-            HttpResponse<String> response = Unirest.get("https://jsonplaceholder.typicode.com/posts")
+            setTimeouts(0, 0);
+            HttpResponse<String> response = get("https://jsonplaceholder.typicode.com/posts")
                     .asString();
 
             System.out.println(response.getBody());
 
         }
     @Test
-    public void request_returnSinglePost_expectedId11() throws UnirestException {
-        Unirest.setTimeouts(0, 0);
-        HttpResponse<String> response = Unirest.get("https://jsonplaceholder.typicode.com/posts?id=11")
+    public void getRequest_returnSinglePost_expectedId11() throws UnirestException {
+        setTimeouts(0, 0);
+        HttpResponse<String> response = get("https://jsonplaceholder.typicode.com/posts?id=11")
                 .asString();
 
         System.out.println(response.getBody());
 
     }
 
-//    @Test
-//    public void
+    @Test
+    public void postRequest_createNewPostResource() throws UnirestException {
+        setTimeouts(0, 0);
+        HttpResponse<String> response = post("https://jsonplaceholder.typicode.com/posts")
+                .field("userId", "1")
+                .field("title", "foo")
+                .field("body", "bar")
+                .asString();
+
+        System.out.println(response.getBody());
+
+    }
+
+    @Test
+    public void deleteRequest_removesPostResource_id1() throws UnirestException {
+        Unirest.setTimeouts(0, 0);
+        HttpResponse<String> response = Unirest.delete("https://jsonplaceholder.typicode.com/posts")
+                .field("Id", "1")
+                .asString();
+
+        System.out.println(response.getBody());
+    }
+
 }
