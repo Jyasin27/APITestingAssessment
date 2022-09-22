@@ -34,7 +34,7 @@ public class MediaPostsService {
 
 
     }
-    public void post_createNewPostResource()
+    public void post_createNewPostResource() //check video 47mins
     {
        var  media = new MediaPosts(1,"foo", "bar");
         media.getBody();
