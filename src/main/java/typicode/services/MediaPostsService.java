@@ -1,28 +1,41 @@
 package typicode.services;
+import com.mashape.unirest.http.ObjectMapper;
 import org.junit.Assert;
 import typicode.models.MediaPosts;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.responseSpecification;
 
 public class MediaPostsService {
 
     private String _baseUrl;
     private String endpoint ="/posts";
     private MediaPosts media;
+    ObjectMapper mapper = new ObjectMapper() {
+        @Override
+        public <T> T readValue(String s, Class<T> aClass) {
+            return null;
+        }
+
+        @Override
+        public String writeValue(Object o) {
+            return null;
+        }
+    };
 
     public MediaPostsService(String baseUrl)
     {
         this._baseUrl = baseUrl;
     }
 
-    public void get_listOfAllPostResources()
+    public MediaPostsService[] get_listOfAllPostResources()
     {
       var response = given().when().get(_baseUrl+ endpoint);
+        response.then().statusCode(200);
         response.print();
+                                                                                //What it will return
+        MediaPostsService[] posts = mapper.readValue(response.body().asString(), MediaPostsService[].class);
 
-        Assert.assertEquals(200, response.getStatusCode());
-
+        return posts;
     }
 
     public void get_returnSinglePost_expectedId11()
@@ -34,12 +47,12 @@ public class MediaPostsService {
 
 
     }
-    public void post_createNewPostResource() //check video 47mins
+    public MediaPosts post_createNewPostResource(MediaPosts media)
     {
-       var  media = new MediaPosts(1,"foo", "bar");
-        media.getBody();
+       var  response = given().baseUri(_baseUrl).body(media).when().post(endpoint);
+       response.then().statusCode(201);
+             return mapper.readValue(response.body().asString(), MediaPosts.class);
 
-        Assert.assertEquals(201, response().getStatusCode());
     }
 
 

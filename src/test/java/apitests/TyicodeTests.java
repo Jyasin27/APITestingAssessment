@@ -1,6 +1,8 @@
 package apitests;
 
+import org.junit.Assert;
 import org.junit.Test;
+import typicode.models.MediaPosts;
 import typicode.services.MediaPostsService;
 
 public class TyicodeTests {
@@ -11,7 +13,8 @@ public class TyicodeTests {
     public void getRequest_listOfAllPostResources()
     {
         MediaPostsService service = new MediaPostsService(baseUrl);
-        service.get_listOfAllPostResources();
+        var posts =service.get_listOfAllPostResources();
+
 
     }
 
@@ -24,7 +27,14 @@ public class TyicodeTests {
 
     @Test
     public void postRequest_createNewPostResource() {
+        MediaPosts postToSend = new MediaPosts(1, "foo", "bar");
+
         MediaPostsService service = new MediaPostsService(baseUrl);
-        service.post_createNewPostResource();
+        var returnedPost = service.post_createNewPostResource(postToSend);
+
+        Assert.assertEquals(postToSend.getId(), returnedPost.getId());
+        Assert.assertEquals(postToSend.getTitle(), returnedPost.getTitle());
+        Assert.assertEquals(postToSend.getBody(), returnedPost.getBody());
+
     }
 }
