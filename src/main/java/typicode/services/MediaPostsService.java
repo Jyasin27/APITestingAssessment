@@ -13,7 +13,7 @@ public class MediaPostsService {
     ObjectMapper mapper = new ObjectMapper() {
         @Override
         public <T> T readValue(String s, Class<T> aClass) {
-            return null;
+            return (T) get_listOfAllPostResources();
         }
 
         @Override
@@ -31,7 +31,7 @@ public class MediaPostsService {
     {
       var response = given().when().get(_baseUrl+ endpoint);
         response.then().statusCode(200);
-        response.print();
+        //response.print();
                                                                                 //What it will return
         MediaPostsService[] posts = mapper.readValue(response.body().asString(), MediaPostsService[].class);
 

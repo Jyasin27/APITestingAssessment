@@ -13,8 +13,7 @@ public class TyicodeTests {
     public void getRequest_listOfAllPostResources()
     {
         MediaPostsService service = new MediaPostsService(baseUrl);
-        var posts =service.get_listOfAllPostResources();
-
+        var posts = service.get_listOfAllPostResources();
 
     }
 
@@ -32,7 +31,7 @@ public class TyicodeTests {
         MediaPostsService service = new MediaPostsService(baseUrl);
         var returnedPost = service.post_createNewPostResource(postToSend);
 
-        Assert.assertEquals(postToSend.getId(), returnedPost.getId());
+        Assert.assertEquals(postToSend.getUserId(), returnedPost.getUserId());
         Assert.assertEquals(postToSend.getTitle(), returnedPost.getTitle());
         Assert.assertEquals(postToSend.getBody(), returnedPost.getBody());
 
