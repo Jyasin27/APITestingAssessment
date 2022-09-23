@@ -13,7 +13,7 @@ public class TyicodeTests {
     public void getRequest_listOfAllPostResources()
     {
         MediaPostsService service = new MediaPostsService(baseUrl);
-        var posts = service.get_listOfAllPostResources();
+        service.get_listOfAllPostResources();
 
     }
 
