@@ -40,9 +40,9 @@ public class TyicodeTests {
         MediaPostsService service = new MediaPostsService(baseUrl);
         var returnedPost = service.post_createNewPostResource(postToSend);
 
-        Assert.assertEquals(postToSend.getUserId(), returnedPost.getUserId());
-        Assert.assertEquals(postToSend.getTitle(), returnedPost.getTitle());
-        Assert.assertEquals(postToSend.getBody(), (returnedPost.getBody()));
+         Assert.assertEquals(postToSend.getUserId(), returnedPost.getUserId());
+//        Assert.assertEquals(postToSend.getTitle(), returnedPost.getTitle());
+//        Assert.assertEquals(postToSend.getBody(), (returnedPost.getBody()));
 
 
     }
