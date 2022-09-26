@@ -54,7 +54,7 @@ public class APITests {
                 .field("Id", "1")
                 .asString();
 
-        Assert.assertEquals("404", response.getStatus());
+        Assert.assertEquals(404, response.getStatus());
 
         System.out.println(response.getBody());
     }

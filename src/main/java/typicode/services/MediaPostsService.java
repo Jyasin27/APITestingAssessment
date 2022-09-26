@@ -1,7 +1,12 @@
 package typicode.services;
 import com.mashape.unirest.http.ObjectMapper;
+import groovy.json.JsonException;
+import io.restassured.mapper.ObjectMapperDeserializationContext;
+import io.restassured.mapper.ObjectMapperSerializationContext;
 import org.junit.Assert;
 import typicode.models.MediaPosts;
+
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -9,33 +14,35 @@ public class MediaPostsService {
 
     private String _baseUrl;
     private String endpoint ="/posts";
-    private MediaPosts media;
-//    ObjectMapper mapper = new ObjectMapper() {
-//        @Override
-//        public <T> T readValue(String s, Class<T> aClass) {
-//            return (T) get_listOfAllPostResources();
-//        }
-//
-//        @Override
-//        public String writeValue(Object o) {
-//            return null;
-//        }
-//    };
+
+
+    ObjectMapper mapper = new ObjectMapper() {
+        @Override
+        public <T> T readValue(String s, Class<T> aClass) {
+            return null;
+        }
+
+        @Override
+        public String writeValue(Object o) {
+            return null;
+        }
+    };
 
     public MediaPostsService(String baseUrl)
     {
         this._baseUrl = baseUrl;
+
     }
 
-    public void get_listOfAllPostResources()
+    public MediaPostsService[] get_listOfAllPostResources()
     {
       var response = given().when().get(_baseUrl+ endpoint);
         response.then().statusCode(200);
         response.print();
                                                                                 //What it will return
-//        MediaPostsService[] posts = mapper.readValue(response.body().asString(), MediaPostsService[].class);
-//
-//        return posts;
+        MediaPostsService[] posts = mapper.readValue(response.body().asString(), MediaPostsService[].class);
+
+        return posts;
     }
 
     public void get_returnSinglePost_expectedId11()
@@ -47,17 +54,22 @@ public class MediaPostsService {
 
 
     }
-    public MediaPosts post_createNewPostResource(MediaPosts media)
+    public MediaPosts post_createNewPostResource(MediaPosts media) throws JsonException
     {
-       var  response = given().baseUri(_baseUrl).body(media).when().post(endpoint);
+       var  response = given().baseUri(_baseUrl).body(media).contentType("application/json").post(endpoint);
        response.then().statusCode(201);
-             //return mapper.readValue(response.body().asString(), MediaPosts.class);
+       response.body().print();
+       return mapper.readValue(response.body().asString(), MediaPosts.class);
 
     }
 
 
-    public void delete_removesPostResource_id1()
+    public void delete_removesPostResource_id1(int id)
     {
+        var response = given().when().delete(_baseUrl+ endpoint+"/"+id);
+        response.getStatusCode();
+        response.print();
 
+        Assert.assertEquals(200, response.getStatusCode());
     }
 }
