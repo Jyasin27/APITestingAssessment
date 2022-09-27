@@ -15,6 +15,7 @@ public class TyicodeTests {
     @Test
     public void getRequest_listOfAllPostResources()
     {
+        //1) Execute a GET request that lists all posts resources
         MediaPostsService service = new MediaPostsService(baseUrl);
         service.get_listOfAllPostResources();
 
@@ -23,6 +24,7 @@ public class TyicodeTests {
     @Test
     public void getRequest_returnSinglePost_expectedId11()
     {
+        //2) Execute a GET request that returns a single posts resource with id = 11
         MediaPostsService service = new MediaPostsService(baseUrl);
         service.get_returnSinglePost_expectedId11();
     }
@@ -30,6 +32,7 @@ public class TyicodeTests {
     @Test
     public void postRequest_createNewPostResource() throws JsonException
     {
+        //3) Execute a POST request to create a new posts resource
         MediaPosts postToSend = new MediaPosts(1, "foo", "bar");
 
         MediaPostsService service = new MediaPostsService(baseUrl);
@@ -39,12 +42,13 @@ public class TyicodeTests {
         Assert.assertEquals(postToSend.getTitle(),"foo");
         Assert.assertEquals(postToSend.getBody(), "bar");
 
-        System.out.println("User 1 has been created");
+        System.out.println("New user has been created");
     }
 
     @Test
     public void deleteRequest_removesPostResource_id1()
     {
+        //4) Execute a DELETE request that removes the posts resource with id = 1
         MediaPostsService service = new MediaPostsService(baseUrl);
         service.delete_removesPostResource_id1(1);
 
