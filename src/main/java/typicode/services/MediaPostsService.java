@@ -1,12 +1,9 @@
 package typicode.services;
 import com.mashape.unirest.http.ObjectMapper;
 import groovy.json.JsonException;
-import io.restassured.mapper.ObjectMapperDeserializationContext;
-import io.restassured.mapper.ObjectMapperSerializationContext;
 import org.junit.Assert;
 import typicode.models.MediaPosts;
 
-import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -14,7 +11,6 @@ public class MediaPostsService {
 
     private String _baseUrl;
     private String endpoint ="/posts";
-
 
     ObjectMapper mapper = new ObjectMapper() {
         @Override
@@ -33,6 +29,7 @@ public class MediaPostsService {
         this._baseUrl = baseUrl;
 
     }
+
 
     public MediaPostsService[] get_listOfAllPostResources()
     {
@@ -54,11 +51,13 @@ public class MediaPostsService {
 
 
     }
+
     public MediaPosts post_createNewPostResource(MediaPosts media) throws JsonException
     {
        var  response = given().baseUri(_baseUrl).body(media).contentType("application/json").post(endpoint);
-       response.then().statusCode(201);
        response.body().print();
+
+       Assert.assertEquals(201, response.getStatusCode());
        return mapper.readValue(response.body().asString(), MediaPosts.class);
 
     }

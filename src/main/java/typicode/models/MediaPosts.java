@@ -15,11 +15,13 @@ public class MediaPosts {
     private String title;
     private String body;
 
+
     public MediaPosts(int userId, String title, String body )
     {
         this.userId = userId;
         this.title = title;
         this.body = body;
     }
+
 
 }

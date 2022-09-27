@@ -1,25 +1,19 @@
 package apitests;
 
 import groovy.json.JsonException;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.junit.Test;
 import typicode.models.MediaPosts;
 import typicode.services.MediaPostsService;
 
-import javax.sound.midi.Soundbank;
-import java.util.HashMap;
-
-import static io.restassured.RestAssured.get;
-import static io.restassured.RestAssured.given;
 
 public class TyicodeTests {
 
     private String baseUrl = "https://jsonplaceholder.typicode.com";
-    SoftAssertions softAssertions = new SoftAssertions();
+
 
     @Test
-    public void getRequest_listOfAllPostResources() //pass
+    public void getRequest_listOfAllPostResources()
     {
         MediaPostsService service = new MediaPostsService(baseUrl);
         service.get_listOfAllPostResources();
@@ -27,7 +21,7 @@ public class TyicodeTests {
     }
 
     @Test
-    public void getRequest_returnSinglePost_expectedId11() //pass
+    public void getRequest_returnSinglePost_expectedId11()
     {
         MediaPostsService service = new MediaPostsService(baseUrl);
         service.get_returnSinglePost_expectedId11();
@@ -38,11 +32,11 @@ public class TyicodeTests {
         MediaPosts postToSend = new MediaPosts(1, "foo", "bar");
 
         MediaPostsService service = new MediaPostsService(baseUrl);
-        var returnedPost = service.post_createNewPostResource(postToSend);
+        service.post_createNewPostResource(postToSend);
 
-         Assert.assertEquals(postToSend.getUserId(), returnedPost.getUserId());
-//        Assert.assertEquals(postToSend.getTitle(), returnedPost.getTitle());
-//        Assert.assertEquals(postToSend.getBody(), (returnedPost.getBody()));
+        Assert.assertEquals(postToSend.getUserId(), 1);
+        Assert.assertEquals(postToSend.getTitle(),"foo");
+        Assert.assertEquals(postToSend.getBody(), "bar");
 
 
     }
