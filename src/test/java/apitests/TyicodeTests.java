@@ -28,7 +28,8 @@ public class TyicodeTests {
     }
 
     @Test
-    public void postRequest_createNewPostResource() throws JsonException {
+    public void postRequest_createNewPostResource() throws JsonException
+    {
         MediaPosts postToSend = new MediaPosts(1, "foo", "bar");
 
         MediaPostsService service = new MediaPostsService(baseUrl);
@@ -38,7 +39,7 @@ public class TyicodeTests {
         Assert.assertEquals(postToSend.getTitle(),"foo");
         Assert.assertEquals(postToSend.getBody(), "bar");
 
-
+        System.out.println("User 1 has been created");
     }
 
     @Test
