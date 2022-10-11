@@ -8,13 +8,12 @@ import typicode.services.MediaPostsService;
 @Getter
 @Setter
 @AllArgsConstructor
-public class MediaPosts {
-
+public class MediaPosts
+{
     private int userId;
     private int id;
     private String title;
     private String body;
-
 
     public MediaPosts(int userId, String title, String body )
     {
@@ -22,6 +21,4 @@ public class MediaPosts {
         this.title = title;
         this.body = body;
     }
-
-
 }

@@ -38,9 +38,9 @@ public class TyicodeTests {
         MediaPostsService service = new MediaPostsService(baseUrl);
         service.post_createNewPostResource(postToSend);
 
-        Assert.assertEquals(postToSend.getUserId(), 1);
-        Assert.assertEquals(postToSend.getTitle(),"foo");
-        Assert.assertEquals(postToSend.getBody(), "bar");
+        Assert.assertEquals(1, postToSend.getUserId());
+        Assert.assertEquals("foo", postToSend.getTitle());
+        Assert.assertEquals("bar", postToSend.getBody());
 
         System.out.println("New user has been created");
     }

@@ -18,7 +18,7 @@ public class APITests {
             HttpResponse<String> response = get("https://jsonplaceholder.typicode.com/posts")
                     .asString();
 
-            Assert.assertEquals("200", response.getStatus());
+            Assert.assertEquals(200, response.getStatus());
             System.out.println(response.getBody());
 
     }
@@ -28,7 +28,7 @@ public class APITests {
         HttpResponse<String> response = get("https://jsonplaceholder.typicode.com/posts?id=11")
                 .asString();
 
-        Assert.assertEquals("200", response.getStatus());
+        Assert.assertEquals(200, response.getStatus());
         System.out.println(response.getBody());
 
     }
@@ -42,7 +42,7 @@ public class APITests {
                 .field("body", "bar")
                 .asString();
 
-        Assert.assertEquals("201", response.getStatus());
+        Assert.assertEquals(201, response.getStatus());
         System.out.println(response.getBody());
 
     }
